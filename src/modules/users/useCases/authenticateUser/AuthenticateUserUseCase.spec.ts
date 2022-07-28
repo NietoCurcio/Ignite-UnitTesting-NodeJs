@@ -2,6 +2,7 @@ import { InMemoryUsersRepository } from "../../repositories/in-memory/InMemoryUs
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
+import { IncorrectEmailOrPasswordError } from "./IncorrectEmailOrPasswordError";
 
 let inMemoryUsersRepository: IUsersRepository;
 let authenticateUserUseCase: AuthenticateUserUseCase;
@@ -32,5 +33,23 @@ describe("Authenticate User", () => {
     expect(auth).toHaveProperty("token");
     expect(auth.token.length).toBeGreaterThan(0);
     expect(auth.user).toHaveProperty("id");
+  });
+
+  it("should not authenticate a non-existent user", () => {
+    expect(async () => {
+      await authenticateUserUseCase.execute({
+        email: "email@test2.com",
+        password: "123",
+      });
+    }).rejects.toBeInstanceOf(IncorrectEmailOrPasswordError);
+  });
+
+  it("should not authenticate a user with incorrect password", () => {
+    expect(async () => {
+      await authenticateUserUseCase.execute({
+        email: "email@test.com",
+        password: "1234",
+      });
+    }).rejects.toBeInstanceOf(IncorrectEmailOrPasswordError);
   });
 });
