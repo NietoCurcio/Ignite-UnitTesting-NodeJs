@@ -4,23 +4,27 @@
 
 The configuration of Jest is done through the `jest.config.ts`, `jest.setup.ts` and `tsconfig.ts` when working with Typescript files.
 
+The unit tests run using in-memory data so that the services for user creation are tested, for example. The Integration follows the complete process of sending a request and getting a response. It creates a database for testing instead of using only in-memory data. In that way, not only the service or the use case for user creation are tested, but the controller, the service and how the data is manipulated (DML) in the database through the repository.
+
 ## Users module
 
-### Unit tests for user creation use case.
+### Unit & Integration tests for user creation use case.
 
 - should create a user
 - should not create a user with the same email
 
-### Unit tests for user authentication use case.
+### Unit & Integration tests for user authentication use case.
 
 - should authenticate a user
 - should not authenticate a non-existent user
 - should not authenticate a user with an incorrect password
 
-### Unit tests for listing profile use case
+### Unit & Integration tests tests for listing profile use case
 
-- should get user profile given a valid id
-- should not get user profile given an invalid id
+- should get user profile given a valid id (Unit test)
+- should not get user profile given an invalid id (Unit test)
+- should get user profile given a valid token (Integration test)
+- should not get user profile given an invalid token (Integration test)
 
 ## Statements module
 
