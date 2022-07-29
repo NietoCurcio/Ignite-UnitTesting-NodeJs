@@ -19,28 +19,49 @@ The unit tests run using in-memory data so that the services for user creation a
 - should not authenticate a non-existent user
 - should not authenticate a user with an incorrect password
 
-### Unit & Integration tests tests for listing profile use case
+### Tests for listing profile use case
 
-- should get user profile given a valid id (Unit test)
-- should not get user profile given an invalid id (Unit test)
-- should get user profile given a valid token (Integration test)
-- should not get user profile given an invalid token (Integration test)
+- Unit test
+
+  - should get user profile given a valid id
+  - should not get user profile given an invalid id
+
+- Integration test
+
+  - should get user profile given a valid token
+  - should not get user profile given an invalid token
 
 ## Statements module
 
-### Unit tests for statement creation use case.
+### Tests for statement creation use case.
 
-- should create a statement
-- should not create statement for a non-existent user
-- should not withdraw with insufficient funds.
+- Unit test
 
-### Unit tests for statement creation use case.
+  - should create a statement
+  - should not create statement for a non-existent user
+  - should not withdraw with insufficient funds
+
+- Integration test
+
+  - should create a deposit statement
+  - should create a withdraw statement
+  - should not create statement with invalid authorization
+  - should not withdraw with insufficient funds
+
+### Unit & Integration tests for get balance use case.
 
 - should get balance and all statements from a user
 - should not get balance from a non-existent user
+- should not get balance from a invalid authorization
 
-### Unit tests for listing statement operation use case.
+### Unit & Integration tests for listing a statement use case.
 
 - should get a statement of operation
 - should not get a statement of non-existent user
 - should not get a statement of another user
+
+## Running the tests:
+
+```
+$ npm run test
+```

@@ -61,7 +61,7 @@ describe("Create Statement", () => {
     }).rejects.toBeInstanceOf(CreateStatementError.UserNotFound);
   });
 
-  it("Should not withdraw with insufficient funds.", () => {
+  it("should not withdraw with insufficient funds", () => {
     expect(async () => {
       const user = await inMemoryUsersRepository.create({
         email: "email@test.com",
