@@ -30,6 +30,7 @@ describe("Create Statement", () => {
       description: "statement description",
       user_id: user.id as string,
       type: OperationType.DEPOSIT,
+      sender_id: null,
     });
 
     expect(deposit).toHaveProperty("id");
@@ -40,6 +41,7 @@ describe("Create Statement", () => {
       description: "statement description",
       user_id: user.id as string,
       type: OperationType.WITHDRAW,
+      sender_id: null,
     });
 
     expect(withdraw).toHaveProperty("id");
@@ -53,6 +55,7 @@ describe("Create Statement", () => {
         description: "statement description",
         user_id: "userId",
         type: OperationType.DEPOSIT,
+        sender_id: null,
       });
     }).rejects.toBeInstanceOf(CreateStatementError.UserNotFound);
   });
@@ -70,7 +73,41 @@ describe("Create Statement", () => {
         description: "statement description",
         user_id: user.id as string,
         type: OperationType.WITHDRAW,
+        sender_id: null,
       });
     }).rejects.toBeInstanceOf(CreateStatementError.InsufficientFunds);
+  });
+
+  it("should create a transfer statement", async () => {
+    const user = await inMemoryUsersRepository.create({
+      email: "email@test.com",
+      name: "test",
+      password: "123",
+    });
+
+    await createStatementUseCase.execute({
+      amount: 100,
+      description: "statement description",
+      user_id: user.id as string,
+      type: OperationType.DEPOSIT,
+      sender_id: null,
+    });
+
+    const user2 = await inMemoryUsersRepository.create({
+      email: "email2@test.com",
+      name: "test2",
+      password: "123",
+    });
+
+    const transfer = await createStatementUseCase.execute({
+      amount: 50,
+      description: "statement description",
+      user_id: user2.id as string,
+      type: OperationType.TRANSFER,
+      sender_id: user.id!,
+    });
+
+    expect(transfer).toHaveProperty("id");
+    expect(transfer.type).toEqual("transfer");
   });
 });

@@ -36,6 +36,7 @@ describe("Get Statement Operation", () => {
       description: "statement description",
       user_id: user.id as string,
       type: OperationType.DEPOSIT,
+      sender_id: null,
     });
 
     const operation = await getStatementOperationUseCase.execute({
@@ -73,6 +74,7 @@ describe("Get Statement Operation", () => {
         description: "statement description2",
         user_id: user2.id as string,
         type: OperationType.DEPOSIT,
+        sender_id: null,
       });
 
       await getStatementOperationUseCase.execute({

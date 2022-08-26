@@ -40,6 +40,7 @@ The unit tests run using in-memory data so that the services for user creation a
   - should create a statement
   - should not create statement for a non-existent user
   - should not withdraw with insufficient funds
+  - should create a transfer statement
 
 - Integration test
 
@@ -47,6 +48,8 @@ The unit tests run using in-memory data so that the services for user creation a
   - should create a withdraw statement
   - should not create statement with invalid authorization
   - should not withdraw with insufficient funds
+  - should create a transfer statement
+  - should update the sender and recipient balance after transference
 
 ### Unit & Integration tests for get balance use case.
 
