@@ -65,3 +65,18 @@ The unit tests run using in-memory data so that the services for user creation a
 ```
 $ npm run test
 ```
+
+## Requirements engineering
+
+### Functional requirements
+
+| Id   | Name           | Actor    |
+| ---- | -------------- | -------- |
+| RF01 | Transfer money | Customer |
+
+### Business rules
+
+| Id   | Description                                                    | Functional Requirement |
+| ---- | -------------------------------------------------------------- | ---------------------- |
+| RN01 | It shouldn't transfer amounts greater than the account balance | RF01                   |
+| RN01 | It should consider the transfers when getting the balance      | RF01                   |

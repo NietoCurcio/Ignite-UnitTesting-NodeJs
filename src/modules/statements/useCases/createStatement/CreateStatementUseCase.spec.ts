@@ -2,15 +2,11 @@ import { InMemoryUsersRepository } from "../../../users/repositories/in-memory/I
 import { InMemoryStatementsRepository } from "../../repositories/in-memory/InMemoryStatementsRepository";
 import { CreateStatementError } from "./CreateStatementError";
 import { CreateStatementUseCase } from "./CreateStatementUseCase";
+import { OperationType } from "./ICreateStatementDTO";
 
 let inMemoryStatementsRepository: InMemoryStatementsRepository;
 let inMemoryUsersRepository: InMemoryUsersRepository;
 let createStatementUseCase: CreateStatementUseCase;
-
-enum OperationType {
-  DEPOSIT = "deposit",
-  WITHDRAW = "withdraw",
-}
 
 describe("Create Statement", () => {
   beforeEach(() => {
